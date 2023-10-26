@@ -4,8 +4,13 @@ import com.easypan.annotation.GlobalInterceptor;
 import com.easypan.entity.config.AppConfig;
 import com.easypan.entity.constants.Constants;
 import com.easypan.entity.enums.FileCategoryEnums;
+import com.easypan.entity.enums.FileFolderTypeEnums;
 import com.easypan.entity.po.FileInfo;
+import com.easypan.entity.query.FileInfoQuery;
+import com.easypan.entity.vo.FolderVO;
+import com.easypan.entity.vo.ResponseVO;
 import com.easypan.service.FileInfoService;
+import com.easypan.utils.CopyTools;
 import com.easypan.utils.StringTools;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.util.List;
 
 /**
  * CommonFileController
@@ -73,6 +79,18 @@ public class CommonFileController extends ABaseController{
             }
         }
         readFile(response,filePath);
+    }
+
+    protected ResponseVO getFolderInfo (String userId , String path) {
+        String[] pathArray = path.split("/");
+        FileInfoQuery fileInfoQuery = new FileInfoQuery();
+        fileInfoQuery.setFolderType(FileFolderTypeEnums.FOLDER.getType());
+        fileInfoQuery.setUserId(userId);
+        fileInfoQuery.setFileIdArray(pathArray);
+        String orderBy = "field(file_id,\"" + StringUtils.join(pathArray, "\",\"") + "\")";
+        fileInfoQuery.setOrderBy(orderBy);
+        List<FileInfo> fileInfos = fileInfoService.findListByParam(fileInfoQuery);
+        return getSuccessResponseVO(CopyTools.copyList(fileInfos, FolderVO.class));
 
     }
 }

@@ -1,7 +1,5 @@
 package com.easypan.controller;
 
-import java.util.List;
-
 import com.easypan.annotation.GlobalInterceptor;
 import com.easypan.annotation.VerifyParam;
 import com.easypan.entity.constants.Constants;
@@ -85,5 +83,21 @@ public class FileInfoController extends CommonFileController{
 	public void getFile (HttpServletResponse response, HttpSession session ,@PathVariable("fileId")String fileId) {
 		SessionWebUserDto webUserDto = getUserInfoFromSession(session);
 		super.getFile(response,fileId, webUserDto.getUserId());
+	}
+
+	@RequestMapping("/newFolder")
+	@GlobalInterceptor(checkParams = true)
+	public ResponseVO newFoloder(HttpSession session,
+								 @VerifyParam(required = true) String filePid,
+								 @VerifyParam(required = true) String fileName) {
+		SessionWebUserDto webUserDto = getUserInfoFromSession(session);
+		FileInfo fileInfo = fileInfoService.newFolder(filePid, webUserDto.getUserId(), fileName);
+		return getSuccessResponseVO(fileInfo);
+	}
+
+	@RequestMapping("/getFolderInfo")
+	@GlobalInterceptor(checkParams = true)
+	public ResponseVO getFolderInfo (HttpSession session , @VerifyParam(required = true) String path) {
+		return super.getFolderInfo(path, getUserInfoFromSession(session).getUserId());
 	}
 }

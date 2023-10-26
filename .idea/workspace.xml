@@ -5,12 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e388e3bc-18cb-4458-b086-33e7e6535c63" name="Changes" comment="ok">
-      <change afterPath="$PROJECT_DIR$/EasyPan/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/FileInfoVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/FolderVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/ShareInfoVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/UserInfoVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/CommonFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/CommonFileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/FileInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/FileInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/resources/rebel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rebel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/query/FileInfoQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/query/FileInfoQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/PaginationResultVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/PaginationResultVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/ResponseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo/ResponseVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/FileInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/FileInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/impl/FileInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/impl/FileInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyPan/src/main/resources/com/easypan/mappers/FileInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/EasyPan/src/main/resources/com/easypan/mappers/FileInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/controller/CommonFileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/controller/CommonFileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/controller/FileInfoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/controller/FileInfoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/entity/query/FileInfoQuery.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/entity/query/FileInfoQuery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/mappers/FileInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/mappers/FileInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/FileInfoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/FileInfoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/impl/FileInfoServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/impl/FileInfoServiceImpl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/impl/FileInfoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/easypan/com/easypan/service/impl/FileInfoServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,35 +66,36 @@
     <option name="sortByType" value="true" />
     <option name="sortKey" value="BY_TYPE" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kk/Desktop/JavaProjects/easypan111&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/kk/Desktop/JavaProjects/easypan111/EasyPan/src/main/java/com/easypan/entity/vo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;redis&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "redis",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -88,6 +104,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/entity/vo" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -157,7 +174,8 @@
       <workItem from="1698150150895" duration="5180000" />
       <workItem from="1698224368874" duration="3830000" />
       <workItem from="1698287550747" duration="21000" />
-      <workItem from="1698287773059" duration="1451000" />
+      <workItem from="1698287773059" duration="5978000" />
+      <workItem from="1698314104817" duration="4017000" />
     </task>
     <task id="LOCAL-00001" summary="ok">
       <option name="closed" value="true" />
@@ -167,7 +185,23 @@
       <option name="project" value="LOCAL" />
       <updated>1698150030579</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ok">
+      <option name="closed" value="true" />
+      <created>1698299645017</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698299645017</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ok">
+      <option name="closed" value="true" />
+      <created>1698299728981</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698299728981</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,16 +225,30 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/CommonFileController.java</url>
-          <line>44</line>
+          <line>50</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/controller/CommonFileController.java</url>
-          <line>63</line>
+          <line>69</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/FileInfoService.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/EasyPan/src/main/java/com/easypan/service/impl/FileInfoServiceImpl.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="org.mybatis.spring.MyBatisSystemException" package="org.mybatis.spring" />
+          <option name="timeStamp" value="10" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -1,12 +1,10 @@
 package com.easypan.service.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -24,7 +22,6 @@ import com.easypan.mappers.UserInfoMapper;
 import com.easypan.utils.DateUtil;
 import com.easypan.utils.ProcessUtils;
 import com.easypan.utils.ScaleFilter;
-import com.fasterxml.jackson.databind.ser.ContainerSerializer;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -291,6 +288,51 @@ public class FileInfoServiceImpl implements FileInfoService {
         }
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public FileInfo newFolder(String filePid, String userId, String folderName) {
+        checkFileName(filePid, userId, folderName, FileFolderTypeEnums.FOLDER.getType());
+        Date curDate = new Date();
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setFileId(StringTools.getRandomString(Constants.LENGTH_10));
+        fileInfo.setUserId(userId);
+        fileInfo.setFilePid(filePid);
+        fileInfo.setFileName(folderName);
+        fileInfo.setFolderType(FileFolderTypeEnums.FOLDER.getType());
+        fileInfo.setCreateTime(curDate);
+        fileInfo.setLastUpdateTime(curDate);
+        fileInfo.setStatus(FileStatusEnums.USING.getStatus());
+        fileInfo.setDelFlag(FileDelFlagEnums.USING.getFlag());
+        this.fileInfoMapper.insert(fileInfo);
+
+        FileInfoQuery fileInfoQuery = new FileInfoQuery();
+        fileInfoQuery.setFilePid(filePid);
+        fileInfoQuery.setUserId(userId);
+        fileInfoQuery.setFileName(folderName);
+        fileInfoQuery.setFolderType(FileFolderTypeEnums.FOLDER.getType());
+        fileInfoQuery.setDelFlag(FileDelFlagEnums.USING.getFlag());
+        Integer count = this.fileInfoMapper.selectCount(fileInfoQuery);
+        if (count > 1) {
+            throw new BusinessException("文件夹" + folderName + "已经存在");
+        }
+        fileInfo.setFileName(folderName);
+        fileInfo.setLastUpdateTime(curDate);
+        return fileInfo;
+    }
+
+    private void checkFileName(String filePid, String userId, String fileName, Integer folderType) {
+        FileInfoQuery fileInfoQuery = new FileInfoQuery();
+        fileInfoQuery.setFolderType(folderType);
+        fileInfoQuery.setFileName(fileName);
+        fileInfoQuery.setFilePid(filePid);
+        fileInfoQuery.setUserId(userId);
+        fileInfoQuery.setDelFlag(FileDelFlagEnums.USING.getFlag());
+        Integer count = this.fileInfoMapper.selectCount(fileInfoQuery);
+        if (count > 0) {
+            throw new BusinessException("此目录下已存在同名文件，请修改名称");
+        }
+    }
+
     private String autoRename(String filePid, String userId, String filename) {
         FileInfoQuery fileInfoQuery = new FileInfoQuery();
         fileInfoQuery.setUserId(userId);
@@ -445,4 +487,5 @@ public class FileInfoServiceImpl implements FileInfoService {
         new File(tsPath).delete();
 
     }
+
 }
