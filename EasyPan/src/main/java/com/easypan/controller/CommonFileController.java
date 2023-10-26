@@ -3,6 +3,9 @@ package com.easypan.controller;
 import com.easypan.annotation.GlobalInterceptor;
 import com.easypan.entity.config.AppConfig;
 import com.easypan.entity.constants.Constants;
+import com.easypan.entity.enums.FileCategoryEnums;
+import com.easypan.entity.po.FileInfo;
+import com.easypan.service.FileInfoService;
 import com.easypan.utils.StringTools;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * CommonFileController
@@ -21,7 +25,10 @@ public class CommonFileController extends ABaseController{
     @Resource
     private AppConfig appConfig;
 
-    public void getImage(HttpServletResponse response, String imageFolder, String imageName) {
+    @Resource
+    private FileInfoService fileInfoService;
+
+    protected void getImage(HttpServletResponse response, String imageFolder, String imageName) {
         if (StringTools.isEmpty(imageFolder) || StringUtils.isBlank(imageName)) {
             return;
         }
@@ -32,5 +39,40 @@ public class CommonFileController extends ABaseController{
         response.setContentType(contentType);
         response.setHeader("Cache-Control", "max-age=2592000");
         readFile(response, filePath);
+    }
+
+    protected void getFile (HttpServletResponse response , String fileId , String userId) {
+         String filePath = null;
+
+        if (fileId.endsWith(".ts")) {
+            String[] tsArray = fileId.split("_");
+            String realFileId = tsArray[0];
+            FileInfo fileInfo = fileInfoService.getFileInfoByFileIdAndUserId(realFileId,userId);
+            if (fileInfo == null) {
+                return;
+            }
+
+            String fileName = fileInfo.getFilePath();
+            fileName = StringTools.getFileNameNoSuffix(fileName) + "/" + fileId;
+            filePath = appConfig.getProjectFolder() + Constants.FILE_FOLDER_FILE + fileName ;
+        } else {
+            FileInfo fileInfo = fileInfoService.getFileInfoByFileIdAndUserId(fileId,userId);
+
+            if (fileInfo == null) {
+                return;
+            }
+            if (fileInfo.getFileCategory().equals(FileCategoryEnums.VIDEO.getCategory())) {
+                String fileNameNoSuffix = StringTools.getFileNameNoSuffix(fileInfo.getFilePath());
+                filePath = appConfig.getProjectFolder() + Constants.FILE_FOLDER_FILE + fileNameNoSuffix + "/" + Constants.M3U8_NAME;
+            } else {
+                filePath = appConfig.getProjectFolder() + Constants.FILE_FOLDER_FILE + fileInfo.getFilePath();
+            }
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return;
+            }
+        }
+        readFile(response,filePath);
+
     }
 }

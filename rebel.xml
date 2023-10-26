@@ -6,10 +6,10 @@
 -->
 <application generated-by="intellij" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_3.xsd">
 
-	<id>easypan</id>
+	<id>easypan111</id>
 
 	<classpath>
-		<dir name="/Users/kk/Desktop/JavaProjects/my-work-space/easypan/target/classes">
+		<dir name="/Users/kk/Desktop/JavaProjects/easypan111/out/production/easypan111">
 		</dir>
 	</classpath>
 
