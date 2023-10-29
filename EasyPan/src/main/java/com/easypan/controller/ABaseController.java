@@ -61,7 +61,6 @@ public class ABaseController {
         if (!StringTools.pathIsOk(filePath)) {
             return;
         }
-
         OutputStream out = null;
         FileInputStream in = null;
         try {

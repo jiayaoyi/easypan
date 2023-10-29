@@ -125,14 +125,14 @@ public class AccountController extends ABaseController {
             }
             SessionWebUserDto sessionWebUserDto = userInfoService.login(email, password);
             session.setAttribute(Constants.SESSION_KEY, sessionWebUserDto);
-            return getSuccessResponseVO(null);
+            return getSuccessResponseVO(sessionWebUserDto);
         } finally {
             session.removeAttribute(Constants.CHECK_CODE_KEY);
         }
     }
 
     @RequestMapping("/resetPwd")
-    @GlobalInterceptor(checkParams = true)
+    @GlobalInterceptor(checkLogin = false, checkParams = true)
     public ResponseVO resetPwd(HttpSession session,
                                @VerifyParam(required = true, regex = VerifyRegexEnum.EMAIL, max = 150) String email,
                                @VerifyParam(required = true) String checkCode,
@@ -150,13 +150,10 @@ public class AccountController extends ABaseController {
     }
 
     @RequestMapping("/getAvatar/{userId}")
-    @GlobalInterceptor(checkLogin = false,checkParams = true)
-    public void getAvatar(HttpServletResponse response,
-                          @VerifyParam(required = true) @PathVariable("userId") String userId
-    ) {
-
+    @GlobalInterceptor(checkLogin = false, checkParams = true)
+    public void getAvatar(HttpServletResponse response, @VerifyParam(required = true) @PathVariable("userId") String userId) {
         String avatarFolderName = Constants.FILE_FOLDER_FILE + Constants.FILE_FOLDER_AVATAR_NAME;
-        File folder = new File(appConfig.getProjectFolder(), avatarFolderName);
+        File folder = new File(appConfig.getProjectFolder(),avatarFolderName);
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -169,7 +166,6 @@ public class AccountController extends ABaseController {
                 return;
             }
             avatarPath = appConfig.getProjectFolder() + avatarFolderName + Constants.AVATAR_DEFUALT;
-
         }
         response.setContentType("image/jpg");
         readFile(response, avatarPath);

@@ -81,7 +81,7 @@ public class CommonFileController extends ABaseController{
         readFile(response,filePath);
     }
 
-    protected ResponseVO getFolderInfo (String userId , String path) {
+    protected ResponseVO getFolderInfo (String path , String userId) {
         String[] pathArray = path.split("/");
         FileInfoQuery fileInfoQuery = new FileInfoQuery();
         fileInfoQuery.setFolderType(FileFolderTypeEnums.FOLDER.getType());
@@ -91,6 +91,5 @@ public class CommonFileController extends ABaseController{
         fileInfoQuery.setOrderBy(orderBy);
         List<FileInfo> fileInfos = fileInfoService.findListByParam(fileInfoQuery);
         return getSuccessResponseVO(CopyTools.copyList(fileInfos, FolderVO.class));
-
     }
 }

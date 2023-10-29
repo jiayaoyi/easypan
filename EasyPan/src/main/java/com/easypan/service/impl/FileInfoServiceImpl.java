@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -318,6 +321,76 @@ public class FileInfoServiceImpl implements FileInfoService {
         fileInfo.setFileName(folderName);
         fileInfo.setLastUpdateTime(curDate);
         return fileInfo;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public FileInfo rename(String fileId, String fileName, String userId) {
+        FileInfo fileInfo = this.fileInfoMapper.selectByFileIdAndUserId(fileId,userId);
+        if (fileInfo != null) {
+            String filePid = fileInfo.getFilePid();
+            checkFileName(filePid,userId,fileName, fileInfo.getFolderType());
+            if (FileFolderTypeEnums.FILE.getType().equals(fileInfo.getFolderType())) {
+                fileName = fileName + StringTools.getFileNameSuffix(fileInfo.getFileName());
+            }
+            Date curDate = new Date();
+            FileInfo dbInfo = new FileInfo();
+            dbInfo.setFileName(fileName);
+            dbInfo.setLastUpdateTime(curDate);
+            this.fileInfoMapper.updateByFileIdAndUserId(dbInfo,fileId,userId);
+            FileInfoQuery fileInfoQuery = new FileInfoQuery();
+            fileInfoQuery.setFilePid(filePid);
+            fileInfoQuery.setUserId(userId);
+            fileInfoQuery.setFileName(fileName);
+            Integer count = this.fileInfoMapper.selectCount(fileInfoQuery);
+            if (count > 1) {
+                throw new BusinessException("文件名" + fileName + "已经存在 ");
+            }
+            fileInfo.setLastUpdateTime(curDate);
+            fileInfo.setFileName(fileName);
+            return fileInfo;
+        } else {
+            throw new BusinessException("文件不存在");
+        }
+
+    }
+
+    @Override
+    public void changeFolder(String fileIds, String filePid, String userId) {
+        if (fileIds.equals(filePid)) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+        if (Constants.ZERO_STR.equals(filePid)) {
+            FileInfo fileInfo = this.fileInfoMapper.selectByFileIdAndUserId(filePid,userId);
+            if (fileInfo == null || !FileDelFlagEnums.USING.equals(fileInfo.getDelFlag())) {
+                throw new BusinessException(ResponseCodeEnum.CODE_600);
+            }
+        }
+        String[] fileIdArray = fileIds.split(",");
+        FileInfoQuery fileInfoQuery = new FileInfoQuery();
+        fileInfoQuery.setFilePid(filePid);
+        fileInfoQuery.setUserId(userId);
+        List<FileInfo> dbFileInfos = this.fileInfoMapper.selectList(fileInfoQuery);
+
+        Map<String,FileInfo> map = dbFileInfos.stream()
+                .collect(Collectors
+                        .toMap(FileInfo::getFileName,
+                                Function.identity(),
+                                (data1,data2) -> data2));
+        fileInfoQuery = new FileInfoQuery();
+        fileInfoQuery.setUserId(userId);
+        fileInfoQuery.setFileIdArray(fileIdArray);
+        List<FileInfo> selectedFileList = this.findListByParam(fileInfoQuery);
+        for (FileInfo item : selectedFileList) {
+            FileInfo rootFileInfo = map.get(item.getFileName());
+            FileInfo updateFileInfo = new FileInfo();
+            if (rootFileInfo != null) {
+                String fileName = StringTools.rename(item.getFileName());
+                updateFileInfo.setFileName(fileName);
+            }
+            updateFileInfo.setFilePid(filePid);
+            this.fileInfoMapper.updateByFileIdAndUserId(updateFileInfo,item.getFileId(),userId);
+        }
     }
 
     private void checkFileName(String filePid, String userId, String fileName, Integer folderType) {

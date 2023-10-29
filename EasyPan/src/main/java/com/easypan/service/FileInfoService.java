@@ -85,4 +85,8 @@ public interface FileInfoService {
 	UploadResultDto uploadFile(SessionWebUserDto webUserDto, String fileId, MultipartFile file, String fileName, String filePid, String fileMd5, Integer chunkIndex,
 							   Integer chunks);
 	FileInfo newFolder(String filePid, String userId, String folderName);
+
+	FileInfo rename(String fileId, String fileName , String userId);
+
+	void changeFolder (String fileIds , String filePid , String userId);
 }
